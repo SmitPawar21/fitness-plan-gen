@@ -210,7 +210,7 @@ p{
 {
     background-color: #14874A;
     color: #fff;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .back-signup{
@@ -243,7 +243,7 @@ p{
   cursor: pointer;
 }
 .login:hover{
-  background-color: rgba(0, 143, 109, 0.692);
+  background-color: #008f6db0;
 }
 
 /* USER BIOMETRICS */
@@ -273,3 +273,313 @@ p{
 select{
   background-color: #000000 !important;
 }
+
+.item_1{
+  background-image: url('./images/subscription.png') !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.item_2{
+  background-image: url('./images/todolist.png') !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.item_3{
+  background-image: url('./images/background.jpg') !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.item_4{
+  background-image: url('./images/background_2.jpg') !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.item_5{
+  background: #00000000 !important;
+}
+.item_5:hover{
+  transform:scale(1) !important;
+  background-color: #00000000 !important;
+}
+.item_6{
+  background-image: url('./images/background_2.jpg') !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.filter-box-item{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #00000000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+  cursor: pointer;
+  font-size: 1.5vw;
+}
+.filter-box-item:hover{
+  opacity: 1;
+  background-color: #000000cf;
+}
+
+/* SUBSCRIPTION PLAN PAGE */
+.subscription-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80vh;
+  background-color: #233142;
+  padding: 20px;
+}
+
+.plan-card {
+  width: 25%;
+  height: 70%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  background-size: 100% 150%;
+  transition: all 0.5s ease;
+}
+
+.plan-card:hover {
+  background-position: right center;
+  transform: translateY(-10px);
+  background-size: 200% 200%;
+}
+
+.card_1{
+  background-image: linear-gradient(135deg, #b0d7de, #3b7cdd);
+}
+.card_2{
+  background-image: linear-gradient(135deg, #bdf0bd, #1e6d1e);
+}
+.card_3{
+  background-image: linear-gradient(135deg, #ffdf28, #ff5e00);
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #f6f6f6;
+  margin: 10px 0;
+}
+
+.plan-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #b025b0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.plan-button:hover {
+  background-color: #e94de9;
+}
+
+.trapezium {
+  width: 200px;
+  height: 0;
+  border-bottom: 100px solid #b025b0;
+  border-left: 100px solid transparent;
+  border-right: 0px solid transparent;
+}
+
+.plan-card ul{
+  width: 100%;
+  height: 50%;
+  font-size: 1.2vw;
+  font-family: 'Poppins';
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style: none;
+  background-color: #00000044;
+  box-sizing: border-box;
+  padding: 1vh;
+  color: white;
+}
+
+/* TO DO LIST PAGE */
+
+.container-todo{
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./images/background3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins';
+}
+
+.box{
+  width: 40%;
+  height: 70%;
+  border: none;
+  border-radius: 10px;
+  background-color: #000000bd;
+}
+::-webkit-scrollbar{
+  width: 3px;
+}
+::-webkit-scrollbar-track{
+  background-color: rgb(0, 0, 0);
+}
+::-webkit-scrollbar-thumb{
+  background-color: rgb(50, 50, 50);
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: rgb(182, 182, 182);
+}
+
+.top{
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 1vh 1vw;
+}
+
+.container-todo h2{
+  color: #2B94F0;
+  margin: 10px;
+  font-family: 'Playwrite FR Moderne';
+}
+
+.top img{
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
+.container-todo .inputbox{
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.container-todo input{
+  width: 80%;
+  height: 40%;
+  padding: 10px;
+  background-color: #e3e3e382;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  margin-left: 9px;
+  font-size: 1.3vw;
+  color: white;
+}
+.container-todo input::placeholder {
+  color: rgb(255, 255, 255); /* Set your desired color here */
+  opacity: 1; /* Ensure the color is fully opaque */
+}
+
+.container-todo .inputbox span{
+  width: 15%;
+  height: 60%;
+  background-color: #F94528;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: white;
+  cursor: pointer;
+  font-size: 1vw;
+  font-family: 'Poppins';
+}
+
+.inputbox span:hover{
+  background-color: #c63822;
+}
+
+#listcontainer{
+  width: 100%;
+  height: 60%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+#listcontainer input{
+  margin-right: auto;
+  width: 3vh;
+  height: 3vh;
+  border-radius: 50%;
+}
+
+.container-todo ul li{
+  width: 100%;
+  list-style: none;
+  color: white;
+  /* position: relative; */
+  font-size: 18px;
+  cursor: pointer;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+
+.container-todo ul li:hover{
+  background-color: rgba(255, 255, 255, 0.182);
+  border: none;
+  border-radius: 5px;
+  transition: all 0.25s ease-out;
+}
+
+/* .container-todo ul li::before{
+  content: '';
+  position: absolute;
+  left: 8px;
+  height: 19px;
+  width: 19px;
+  background-image: url('./images/unchecked.svg');
+  background-position: center;
+  background-size: cover;
+} */
+
+.container-todo ul li span{
+  height: 20px;
+  width: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 1vh 1vw;
+}
+.container-todo ul li span:hover{
+  background-color: rgb(92, 92, 92);
+}
+
+/* .container-todo ul li.checked{
+  color: rgb(211, 211, 211);
+  text-decoration: line-through;
+}
+.container-todo ul li.checked::before{
+  background-image: url('./images/checked.svg');
+} */
