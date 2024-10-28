@@ -11,6 +11,9 @@ import { ChatbotPage } from './pages/ChatbotPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { ToDoListPage } from './pages/ToDoListPage';
 import { PlanInfoPage } from './pages/PlanInfoPage';
+import { UpdateBiometrics } from './pages/UpdateBiometrics';
+import { About } from './pages/About';
+import { Usage } from './pages/Usage';
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
           <Route path='/analytics' element={<AnalyticsPage />} />
           <Route path='/todolist' element={<ToDoListPage />} />
           <Route path='/planinfo' element={<PlanInfoPage />} />
+          <Route path='/updatebiometrics' element={<UpdateBiometrics />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/usage' element={<Usage />} />
         </Routes>
       </Router>
     </div>

@@ -1,8 +1,16 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Button } from '@mui/material';
+import {useNavigate} from "react-router-dom";
 
 export const LandingPage = () => {
+
+  const navigate = useNavigate();
+
+  const handleDash = ()=>{
+    navigate('/dashboard');
+  }
+
   return (
     <div className='landing-page'>
       <Navbar />
@@ -16,7 +24,7 @@ export const LandingPage = () => {
       <div className='heading'>
         <h1> FitGenius </h1>
         <p> Your Personalized Path to Peak Performance! </p>
-        <Button variant="contained" className='button'> Go To Dashboard </Button>
+        <Button variant="contained" className='button' onClick={handleDash}> Go To Dashboard </Button>
       </div>
 
     </div>

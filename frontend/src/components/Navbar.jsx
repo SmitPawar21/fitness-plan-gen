@@ -23,8 +23,17 @@ export const Navbar = () => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (num) => {
     setAnchorElNav(null);
+    if(num === 1) {
+      navigate('/about');
+    }
+    else if(num === 2) {
+      navigate('/subscription');
+    }
+    else if(num === 3) {
+      navigate('/usage');
+    }
   };
   const navigate = useNavigate();
 
@@ -117,15 +126,24 @@ export const Navbar = () => {
           </Typography>
           
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(1)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                About
               </Button>
-            ))}
+              <Button
+                onClick={() => handleCloseNavMenu(2)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Subscription
+              </Button>
+              <Button
+                onClick={() => handleCloseNavMenu(3)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Usage
+              </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
