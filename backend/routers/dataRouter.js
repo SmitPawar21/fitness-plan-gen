@@ -38,7 +38,7 @@ router.post('/biometrics', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    //  CHECK IF THE GIVEN EMAIL IS PRESENT OR NOT.
+    //  CHECK IF THE GIVEN EMAIL IS PRESENT OR NOT
     const response = await checkEmailExists(email);
 
     if(response === false)
@@ -50,6 +50,7 @@ router.post('/login', async (req, res) => {
     //  GENERATE TOKEN
     try{
         const token = await generateToken(user_id);
+        console.log(token);
         return res.status(201).json({message: 'User Found', token: token});
     } catch (err){
         res.status(403).json({error: `Error: ${err}`});

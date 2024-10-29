@@ -28,6 +28,8 @@ export const SignupPage = () => {
         confirmPassword: ''
     });
 
+    const [userId, setUserId] = useState();
+
     const updateDataName = (e) => {
         let value = e.target.value;
         setFormData({
@@ -96,19 +98,22 @@ export const SignupPage = () => {
         if (answer === true) {
 
             //fetching data towards backend
-            const response = await fetch('http://localhost:5000/signup', {
+            await fetch('http://localhost:5000/user', {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
                 },
                 body: JSON.stringify({
+                    name: formData.name,
                     email: formData.email,
                     password: formData.password,
                 }),
-            });
-
-            console.log(response);
-            handleSignInPage();
+            }).then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setUserId(data.user_id);
+                handleSignInPage();
+        }); 
         }
     }
 

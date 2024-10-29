@@ -3,8 +3,10 @@ import { useState } from "react";
 import background_2 from "../images/background_2.jpg";
 import email from "../images/email.svg";
 import pass from "../images/pass.svg";
+import { useNavigate } from 'react-router-dom';
 
 export const SigninPage = () => {
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
     email: '',
@@ -28,9 +30,28 @@ export const SigninPage = () => {
     })
   }
 
-  const checkData = ()=>{
+  const checkData = async ()=>{
 
-    console.log("Data will be send to backend. User will be created using AuthContext. Token will be created. And then User will get navigate to userinfo page")
+    // this will first check whether user exist. then will take id on the basis of email from database. and after taking id will create a token based on that id
+
+    await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: userData.email,
+        password: userData.password
+      })
+    })
+    .then((res) => res.json())
+    .then((data) =>{
+      const token = data.token;
+      // now set this token to cookies
+      
+      alert('You are successfully logged in');
+      navigate('/userinfo');
+    });
 
   }
 
