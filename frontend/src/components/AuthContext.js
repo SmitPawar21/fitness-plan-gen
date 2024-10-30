@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(null);
+  const [isDataEntered, setIsDataEntered] = useState(false);
 
   const login = (userData)=>{
     setUser(userData);
@@ -17,6 +18,10 @@ export const AuthProvider = ({ children }) => {
 
   const saveToken = (recieved_token) =>{
     setToken(recieved_token);
+  };
+
+  const dataEntry = (value) =>{
+    setIsDataEntered(value);
   }
 
   const logout = () => {
@@ -24,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, saveUserId, userId, saveToken, token }}>
+    <AuthContext.Provider value={{ user, login, logout, saveUserId, userId, saveToken, token, isDataEntered, dataEntry }}>
       {children}
     </AuthContext.Provider>
   );

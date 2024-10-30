@@ -70,6 +70,19 @@ const checkEmailExists = async (email) =>{
     return result.rows[0].exists;
 };
 
+const checkUserIdExists = async (user_id) =>{
+    const query = `
+        SELECT EXISTS (
+            SELECT 1
+            FROM user_biometrics
+            WHERE id = $1
+        )
+    `;
+
+    const result = await client.query(query, [user_id]);
+    return result.rows[0].exists;
+}
+
 const getUserId = async (email) =>{
     const query = `
         SELECT id FROM users
@@ -81,4 +94,4 @@ const getUserId = async (email) =>{
     return result.rows[0].id;
 }
 
-module.exports = {connectDatabase, insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId};
+module.exports = {connectDatabase, insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists};

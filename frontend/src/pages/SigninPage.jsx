@@ -12,6 +12,8 @@ export const SigninPage = () => {
   const {saveUserId} = useAuth();
   const {saveToken} = useAuth();
   const {token} = useAuth();
+  const {dataEntry} = useAuth();
+  const {isDataEntered} = useAuth();
 
   const [userData, setUserData] = useState({
     email: '',
@@ -54,6 +56,9 @@ export const SigninPage = () => {
     .then((data) =>{
       const token = data.token;
       const user_id = data.user_id;
+      const value = data.userIdExists;
+
+      dataEntry(value);
 
       console.log('login ke baad user id: ', user_id);
 
@@ -73,7 +78,14 @@ export const SigninPage = () => {
       console.log(data);
       if(data.message === 'success'){
         alert('Logged in Successfully');
-        navigate('/userinfo');
+
+        if(isDataEntered === true)
+        {
+          navigate('/dashboard');
+        }
+        else{
+          navigate('/userinfo');
+        }
       }
       else{
         alert('You have no access sorry.')

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId } = require("../database/connect");
+const { insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists } = require("../database/connect");
 const { generateToken } = require("../controllers/tokenController");
 const tokenVerifying = require("../middlewares/authMiddleware");
 
@@ -48,11 +48,14 @@ router.post('/login', async (req, res) => {
     //  GET USER_ID FROM TABLE
     const user_id = await getUserId(email);
 
+    //  CHECK WHETHER THIS USER ID IS PRESENT IN BIOMETRICS OR NOT
+    const result = await checkUserIdExists(user_id);
+
     //  GENERATE TOKEN
     try{
         const token = await generateToken(user_id);
         console.log(token);
-        return res.status(201).json({message: 'User Found', token: token, user_id: user_id});
+        return res.status(201).json({message: 'User Found', token: token, user_id: user_id, userIdExists: result});
     } catch (err){
         res.status(403).json({error: `Error: ${err}`});
     }

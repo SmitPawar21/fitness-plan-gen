@@ -17,6 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export const DashboardPage = () => {
 
   const {user} = useAuth();
+  const {logout} = useAuth();
 
   const navigate = useNavigate();
 
@@ -50,6 +51,11 @@ export const DashboardPage = () => {
 
   const handleUsage = ()=>{
     navigate('/usage')
+  }
+
+  const handleLogout = ()=>{
+    logout();
+    navigate('/');
   }
 
   if(!user){
@@ -97,6 +103,7 @@ export const DashboardPage = () => {
               <li onClick={handleHome} style={{textDecoration: 'underline', color:'white', cursor:'pointer'}}>Home</li>
               <li onClick={handleAbout} style={{textDecoration: 'underline', color:'white',cursor:'pointer'}}>About</li>
               <li onClick={handleUsage} style={{textDecoration: 'underline', color:'white',cursor:'pointer'}}>Usage</li>
+              <li onClick={handleLogout} style={{textDecoration: 'underline', color:'white',cursor:'pointer'}}>Logout</li>
             </ul>
           </Item>
         </Grid>
