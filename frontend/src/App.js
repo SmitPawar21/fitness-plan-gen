@@ -14,28 +14,32 @@ import { PlanInfoPage } from './pages/PlanInfoPage';
 import { UpdateBiometrics } from './pages/UpdateBiometrics';
 import { About } from './pages/About';
 import { Usage } from './pages/Usage';
+import { AuthProvider } from './components/AuthContext.js';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path='/' element={<LandingPage />} />
-          <Route path='/signup' element={<SignupPage />} />
-          <Route path='/signin' element={<SigninPage />} />
-          <Route path='/userinfo' element={<UserInfoPage />} />
-          <Route path='/dashboard' element={<DashboardPage />} />
-          <Route path='/generateplan' element={<GenPlanPage />} />
-          <Route path='/subscription' element={<SubscriptionPage />} />
-          <Route path='/chatbot' element={<ChatbotPage />} />
-          <Route path='/analytics' element={<AnalyticsPage />} />
-          <Route path='/todolist' element={<ToDoListPage />} />
-          <Route path='/planinfo' element={<PlanInfoPage />} />
-          <Route path='/updatebiometrics' element={<UpdateBiometrics />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/usage' element={<Usage />} />
-        </Routes>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path='/' element={<LandingPage />} />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/signin' element={<SigninPage />} />
+            <Route path='/userinfo' element={<UserInfoPage />} />
+            <Route path='/dashboard' element={<DashboardPage />} />
+            <Route path='/generateplan' element={<GenPlanPage />} />
+            <Route path='/subscription' element={<SubscriptionPage />} />
+            <Route path='/chatbot' element={<ChatbotPage />} />
+            <Route path='/analytics' element={<AnalyticsPage />} />
+            <Route path='/todolist' element={<ToDoListPage />} />
+            <Route path='/planinfo' element={<PlanInfoPage />} />
+            <Route path='/updatebiometrics' element={<UpdateBiometrics />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/usage' element={<Usage />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+
     </div>
   );
 }

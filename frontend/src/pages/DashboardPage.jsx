@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import { Clock } from '../components/Clock';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from '../components/AuthContext';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -14,6 +15,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export const DashboardPage = () => {
+
+  const {user} = useAuth();
+
   const navigate = useNavigate();
 
   const handleGenPlanPage = ()=>{
@@ -46,6 +50,10 @@ export const DashboardPage = () => {
 
   const handleUsage = ()=>{
     navigate('/usage')
+  }
+
+  if(!user){
+    return <Navigate to="/signup" />;
   }
 
   return (

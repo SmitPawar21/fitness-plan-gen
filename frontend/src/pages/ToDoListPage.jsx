@@ -32,7 +32,7 @@ export const ToDoListPage = () => {
   };
 
   const toggleTask = (id) => {
-    setTasks(tasks.map(task => 
+    setTasks(tasks.map(task =>
       task.id === id ? { ...task, completed: !task.completed } : task
     ));
   };
@@ -42,46 +42,54 @@ export const ToDoListPage = () => {
   };
 
   return (
-    <div className="container-todo">
-      <div className="box">
-        <div className="top">
-          <h2>To do list</h2>
-        </div>
 
-        <div className="inputbox">
-          <input
-            type="text"
-            placeholder="Write your task..."
-            id="input-box"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <span
-            className="btn"
-            onClick={handleAddTask}
-          >
-            Add task
-          </span>
-        </div>
+    <div>
 
-        <ul id="listcontainer">
-          {tasks.map(task => (
-            <li key={task.id}>
-              <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={() => toggleTask(task.id)}
-              />
-              <span className='text-todo' style={{ textDecoration: task.completed ? 'line-through' : 'none'}}>
-                {task.text}
-              </span>
-              <button onClick={() => deleteTask(task.id)}>
-                <X />
-              </button>
-            </li>
-          ))}
-        </ul>
+      <div className="filter-box"></div>
+
+      <div className="container-todo">
+
+        <div className="box">
+          <div className="top">
+            <h2>To do list</h2>
+          </div>
+
+          <div className="inputbox">
+            <input
+              type="text"
+              placeholder="Write your task..."
+              id="input-box"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <span
+              className="btn"
+              onClick={handleAddTask}
+            >
+              Add task
+            </span>
+          </div>
+
+          <ul id="listcontainer">
+            {tasks.map(task => (
+              <li key={task.id}>
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => toggleTask(task.id)}
+                />
+                <span className='text-todo' style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
+                  {task.text}
+                </span>
+                <button onClick={() => deleteTask(task.id)} style={{height: '15px', width: '15px', display:'flex', justifyContent:'center', alignItems:'center', background:'red', outline:'none', border:'none'}}>
+                  <X style={{width:'17px', height:'17px', color:'white', cursor:'pointer'}}/>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+
     </div>
   );
 };

@@ -43,7 +43,7 @@ const insertRowUsers = async (name, email, password) => {
 const insertRowBiometrics = async (user_id, h,w,age,gender,bp,steps,heartrate,fat,bmi,chest,waist,hips,cond,restrict)=>{
     const query = `
          INSERT INTO user_biometrics (id, height, weight, age, gender, bp, steps, heartrate, fat, bmi, chest, waist, hips, condition, restrictions)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);
+         VALUES ($1, $2, CAST(ARRAY[$3] AS integer[]), $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);
     `;
     console.log("this is user id:", user_id);
     const values = [user_id, h,w,age,gender,bp,steps,heartrate,fat,bmi,chest,waist,hips,cond,restrict];

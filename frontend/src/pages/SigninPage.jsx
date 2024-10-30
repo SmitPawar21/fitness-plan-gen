@@ -4,9 +4,14 @@ import background_2 from "../images/background_2.jpg";
 import email from "../images/email.svg";
 import pass from "../images/pass.svg";
 import { useNavigate } from 'react-router-dom';
+import {useAuth} from '../components/AuthContext';
 
 export const SigninPage = () => {
   const navigate = useNavigate();
+  const {login} = useAuth();
+  const {saveUserId} = useAuth();
+  const {saveToken} = useAuth();
+  const {token} = useAuth();
 
   const [userData, setUserData] = useState({
     email: '',
@@ -34,6 +39,7 @@ export const SigninPage = () => {
 
     // this will first check whether user exist. then will take id on the basis of email from database. and after taking id will create a token based on that id
 
+    login(userData);
     await fetch('http://localhost:5000/login', {
       method: 'POST',
       headers: {
@@ -47,12 +53,32 @@ export const SigninPage = () => {
     .then((res) => res.json())
     .then((data) =>{
       const token = data.token;
-      // now set this token to cookies
-      
-      alert('You are successfully logged in');
-      navigate('/userinfo');
+      const user_id = data.user_id;
+
+      console.log('login ke baad user id: ', user_id);
+
+      saveToken(token);
+      saveUserId(user_id);
     });
 
+    await fetch('http://localhost:5000/protected',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${token}`
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      if(data.message === 'success'){
+        alert('Logged in Successfully');
+        navigate('/userinfo');
+      }
+      else{
+        alert('You have no access sorry.')
+      }
+    })
   }
 
   return (

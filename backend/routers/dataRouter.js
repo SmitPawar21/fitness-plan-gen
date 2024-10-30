@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId } = require("../database/connect");
 const { generateToken } = require("../controllers/tokenController");
+const tokenVerifying = require("../middlewares/authMiddleware");
 
 // SAVING USER CREDENTIALS IN DATABASE
 router.post('/user', async (req, res) => {
@@ -51,10 +52,14 @@ router.post('/login', async (req, res) => {
     try{
         const token = await generateToken(user_id);
         console.log(token);
-        return res.status(201).json({message: 'User Found', token: token});
+        return res.status(201).json({message: 'User Found', token: token, user_id: user_id});
     } catch (err){
         res.status(403).json({error: `Error: ${err}`});
     }
+});
+
+router.post('/protected', tokenVerifying, (req, res)=>{
+    res.status(201).json({message: 'success'});
 })
 
 module.exports = router;

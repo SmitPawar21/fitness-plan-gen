@@ -417,7 +417,7 @@ select{
 .container-todo{
   width: 100vw;
   height: 100vh;
-  background-image: url('./images/background3.jpg');
+  background-image: url('./images/background_2.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -432,7 +432,8 @@ select{
   height: 70%;
   border: none;
   border-radius: 10px;
-  background-color: #000000bd;
+  background-color: rgba(5, 5, 5, 0.703);
+  z-index: 100;
 }
 ::-webkit-scrollbar{
   width: 3px;
@@ -480,10 +481,10 @@ select{
 }
 
 .container-todo input{
-  width: 80%;
-  height: 40%;
+  width: 75%;
+  height: 30%;
   padding: 10px;
-  background-color: #e3e3e382;
+  background-color: #7a7a7a82;
   border: none;
   outline: none;
   border-radius: 10px;
@@ -499,7 +500,7 @@ select{
 .container-todo .inputbox span{
   width: 15%;
   height: 60%;
-  background-color: #F94528;
+  background-color: #2B94F0;
   border: none;
   border-radius: 10px;
   display: flex;
@@ -513,7 +514,7 @@ select{
 }
 
 .inputbox span:hover{
-  background-color: #c63822;
+  background-color: #217fd1;
 }
 
 #listcontainer{
@@ -545,13 +546,6 @@ select{
   margin-bottom: 2vh;
 }
 
-.container-todo ul li:hover{
-  background-color: rgba(255, 255, 255, 0.182);
-  border: none;
-  border-radius: 5px;
-  transition: all 0.25s ease-out;
-}
-
 .container-todo ul li span{
   height: 20px;
   width: 100%;
@@ -560,9 +554,6 @@ select{
   align-items: center;
   text-align: left;
   padding: 1vh 1vw;
-}
-.container-todo ul li span:hover{
-  background-color: rgb(92, 92, 92);
 }
 
 /* GENERATE PLAN PAGE */
