@@ -56,6 +56,23 @@ const insertRowBiometrics = async (user_id, h,w,age,gender,bp,steps,heartrate,fa
     }
 };
 
+//  GET ALL BIOMETRICS FOR THE GIVEN USER ID
+const getAllBiometrics = async (user_id) => {
+
+    const query = `
+        SELECT * FROM user_biometrics
+        WHERE id = $1;
+    `;
+
+    try{
+        const result = await client.query(query, [user_id]);
+        return result.rows[0];
+    } catch (err){
+
+    }
+
+}
+
 //  CHECK IF EMAIL EXIST IN DATABASE
 const checkEmailExists = async (email) =>{
     const query = `
@@ -94,4 +111,4 @@ const getUserId = async (email) =>{
     return result.rows[0].id;
 }
 
-module.exports = {connectDatabase, insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists};
+module.exports = {connectDatabase, insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists, getAllBiometrics};

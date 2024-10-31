@@ -1,16 +1,38 @@
 import React from 'react';
 import { useState } from 'react';
+import { useAuth } from '../components/AuthContext';
 
 export const GenPlanPage = () => {
 
   const [message, setMessage] = useState('');
 
-  const generatePrompt = () => {
+  const {userId} = useAuth();
+  const {savedPlan} = useAuth();
 
-    setMessage("Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio odit eveniet reprehenderit facere, totam ipsa architecto iure, fugiat aliquid perferendis ducimus iste natus a tenetur eum optio repudiandae voluptatum quia ad animi tempora amet deserunt? Sint recusandae culpa sit voluptates illo numquam explicabo ratione voluptatibus dicta minima quam delectus magni saepe et, necessitatibus beatae cupiditate esse corporis eligendi. Ut, est.");
+  const generatePrompt = async () => {
+
+    await fetch('http://localhost:5000/generateplan',{
+      method: 'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: userId
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      setMessage(data.plan);
+    });
 
     console.log(message);
   }
+
+  const savePlan = ()=>{
+    savedPlan(message);
+    alert('Saved Your Plan successfully. View it in `Plan details` sections');
+  };
 
   return (
     <div>
@@ -25,7 +47,7 @@ export const GenPlanPage = () => {
 
           <button class="generate-button" style={{ display: message === '' ? 'none' : 'block' }}>Copy This Plan</button>
           <button class="generate-button" onClick={generatePrompt}>Generate New Plan</button>
-          <button class="generate-button" style={{ display: message === '' ? 'none' : 'block' }}>Save This Plan</button>
+          <button class="generate-button" onClick={savePlan} style={{ display: message === '' ? 'none' : 'block' }}>Save This Plan</button>
 
         </div>
       </div>

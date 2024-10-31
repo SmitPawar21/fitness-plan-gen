@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists } = require("../database/connect");
+const { insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists, getAllBiometrics } = require("../database/connect");
 const { generateToken } = require("../controllers/tokenController");
+const getLLMresponse = require("../controllers/LLMController");
 const tokenVerifying = require("../middlewares/authMiddleware");
 
 // SAVING USER CREDENTIALS IN DATABASE
@@ -63,6 +64,42 @@ router.post('/login', async (req, res) => {
 
 router.post('/protected', tokenVerifying, (req, res)=>{
     res.status(201).json({message: 'success'});
+})
+
+router.post('/generateplan', async (req, res)=>{
+
+    const {user_id} = req.body;
+
+    const biometrics = await getAllBiometrics(user_id);
+
+    const prompt = `
+        Here is the user's biometrics data for fitness planning:
+        - Age: ${biometrics.age}
+        - Gender: ${biometrics.gender}
+        - Height: ${biometrics.height} cm
+        - Weight: ${biometrics.weight[biometrics.weight.length - 1]} kg
+        - Blood Pressure: ${biometrics.bp}
+        - Average steps count per day: ${biometrics.steps}
+        - Resting Heart rate: ${biometrics.heartrate}
+        - Fat: ${biometrics.fat}
+        - BMI: ${biometrics.bmi}
+        - Chest measurement: ${biometrics.chest}
+        - Waist measurement: ${biometrics.waist}
+        - Hips measurement: ${biometrics.hips}
+        - Medical condition: ${biometrics.cond}
+        - Health restrictions: ${biometrics.restrict}
+
+        Note: Ignore all the null and 0 values present for any of the key discussed above. Consider it as user has not entered that particular values.
+
+        Generate a personalized fitness plan based on the above biometrics.
+
+        Start with "Hello mam" or "Hello sir" based on gender of the above present data.
+    `;
+
+    const response = await getLLMresponse(prompt);
+
+    res.status(201).json({plan: response});
+
 })
 
 module.exports = router;
