@@ -41,6 +41,10 @@ export const Navbar = () => {
     navigate('/signup');
   }
 
+  const handleLogin = ()=>{
+    navigate('/signin');
+  }
+
   return (
     <AppBar 
       position="static" 
@@ -160,6 +164,23 @@ export const Navbar = () => {
               onClick={handleRegister}
             >
               Register
+            </Button>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Button 
+              variant="outlined" 
+              sx={{ 
+                color: 'white',
+                marginLeft: '1vw',
+                borderColor: 'white',
+                '&:hover': {
+                  borderColor: 'white',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                }
+              }}
+              onClick={handleLogin}
+            >
+              Login
             </Button>
           </Box>
         </Toolbar>

@@ -59,7 +59,7 @@ export const DashboardPage = () => {
   }
 
   if(!user){
-    return <Navigate to="/signup" />;
+    return <Navigate to="/signin" />;
   }
 
   return (
