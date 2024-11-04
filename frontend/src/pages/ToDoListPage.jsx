@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import {useAuth} from '../components/AuthContext';
 
 export const ToDoListPage = () => {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const {userId} = useAuth();
 
-  // Load tasks from localStorage on component mount
-  useEffect(() => {
-    const savedTasks = localStorage.getItem('tasks');
-    if (savedTasks) {
-      setTasks(JSON.parse(savedTasks));
-    }
-  }, []);
-
-  // Save tasks to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
-
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     if (inputValue.trim() !== '') {
-      setTasks([...tasks, { id: Date.now(), text: inputValue, completed: false }]);
-      setInputValue('');
-    }
-  };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleAddTask();
+      await fetch('http://localhost:5000/todolist',{
+        method: 'POST',
+        headers:{
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          task: inputValue
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
     }
+    
   };
 
   const toggleTask = (id) => {
@@ -76,7 +73,7 @@ export const ToDoListPage = () => {
                 <input
                   type="checkbox"
                   checked={task.completed}
-                  onChange={() => toggleTask(task.id)}
+                  onChange={toggleTask}
                 />
                 <span className='text-todo' style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
                   {task.text}

@@ -638,3 +638,95 @@ select{
 .plan-info-button:hover{
   background-color: #966200;
 }
+
+/* ABOUT US PAGE */
+.aboutus-container {
+  background-color: #233142;
+  padding: 1rem 1rem;
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+}
+
+.aboutus-content {
+  width: 60vw;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1vw;
+}
+
+.aboutus-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #dadada;
+}
+
+.aboutus-description {
+  color: #bababa;
+  margin-bottom: 1rem;
+  font-size:  1.2vw;
+}
+
+.aboutus-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+}
+
+.aboutus-section {
+  flex: 1;
+}
+
+.aboutus-subtitle {
+  font-size: 1.7vw;
+  font-weight: 600;
+  color: #fafafa;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.aboutus-text {
+  color: #c6c6c6;
+  margin-bottom: 1rem;
+  font-size: 1.2vw;
+  text-align: center;
+}
+
+.aboutus-list {
+  list-style-type: disc;
+  margin-left: 1rem;
+  color: #d2d2d2;
+  font-size: 1.3vw;
+  text-align:left;
+  list-style:inside;
+}
+
+.aboutus-cta {
+  margin-top: 1rem;
+}
+
+.aboutus-cta-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #d0d0d0;
+  margin-bottom: 0.5rem;
+}
+
+.aboutus-cta-text {
+  color: #b3b3b3;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.2vw;
+}
+.aboutus-image{
+  width: 40vw;
+  height: 95%;
+  background-image: url('./images/fitness_1.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

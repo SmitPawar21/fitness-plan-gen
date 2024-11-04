@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 export const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
-  const pages = ['About Us', 'Subscription', 'Usage'];
+  const pages = ['About Us', 'Subscription', 'Home'];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,7 +32,7 @@ export const Navbar = () => {
       navigate('/subscription');
     }
     else if(num === 3) {
-      navigate('/usage');
+      navigate('/');
     }
   };
   const navigate = useNavigate();
@@ -146,7 +146,7 @@ export const Navbar = () => {
                 onClick={() => handleCloseNavMenu(3)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                Usage
+                Home
               </Button>
           </Box>
 

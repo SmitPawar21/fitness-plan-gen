@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists, getAllBiometrics } = require("../database/connect");
+const { insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists, getAllBiometrics, addTask } = require("../database/connect");
 const { generateToken } = require("../controllers/tokenController");
 const getLLMresponse = require("../controllers/LLMController");
 const tokenVerifying = require("../middlewares/authMiddleware");
@@ -34,6 +34,32 @@ router.post('/biometrics', async (req, res) => {
         res.status(201).json({message: 'Biometrics added'});
     } catch (err){
         res.status(403).json({error: 'Something went wrong.', err});
+    }
+});
+
+router.get('/biometrics', async (req, res) => {
+    const {user_id} = req.body;
+
+    try{
+        const response = await getAllBiometrics(user_id);
+
+        res.status(201).json({response});
+    } catch (err){
+        res.status(403).json({error: `Something went wrong ${err}`});
+    }
+});
+
+router.patch('/biometrics', async (req, res) =>{
+    const user_id = req.headers['authorization'].split(' ')[1];
+
+    const {formData} = req.body;
+
+    try{
+        const response = await updateBiometrics(user_id, formData);
+
+        res.status(201).json({message: 'updated', response: response});
+    } catch (err){
+        res.status(403).json({error: `Something went wrong. ${err}`});
     }
 });
 
@@ -99,7 +125,17 @@ router.post('/generateplan', async (req, res)=>{
     const response = await getLLMresponse(prompt);
 
     res.status(201).json({plan: response});
+});
 
-})
+router.post('todolist', async (req, res) => {
+    const {user_id, task} = req.body;
+
+    try{
+        await addTask(user_id, task);
+        res.status(201).json({message: 'Task Added'});
+    } catch (err){
+        res.status(403).json({error: `Something went wrong. ${err}`});
+    }
+});
 
 module.exports = router;

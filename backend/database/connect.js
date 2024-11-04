@@ -111,4 +111,18 @@ const getUserId = async (email) =>{
     return result.rows[0].id;
 }
 
-module.exports = {connectDatabase, insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists, getAllBiometrics};
+const addTask = async (user_id, task) => {
+    const query = `
+        INSERT INTO tasks (id, task, is_completed)
+        VALUES ($1, $2, False)
+    `;
+
+    try{
+        await client.query(query, [user_id, task]);
+        console.log("QUERY OK, Inserted in tasks table");
+    } catch (err){
+        console.log(`Something went wrong while inserting. ${err}`);
+    }
+}
+
+module.exports = {connectDatabase, insertRowUsers, insertRowBiometrics, checkEmailExists, getUserId, checkUserIdExists, getAllBiometrics, addTask};
