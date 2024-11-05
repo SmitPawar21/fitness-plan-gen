@@ -1,90 +1,88 @@
-// AnalyticsPage.jsx
-import React, { useEffect, useState } from 'react';
-import { Pie, Line, Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid2';
+import { LineGraph } from "../components/LineGraph";
+import { PieGraph } from '../components/PieGraph';
+import { RadarGraph } from '../components/RadarGraph';
+import { Navigate, useNavigate } from "react-router-dom";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement);
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  color: theme.palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+  height: '46vh',
+  boxSizing: 'border-box',
+  padding: '0vh 1vw',
+}));
 
 export const AnalyticsPage = () => {
-  const [weightData, setWeightData] = useState([]);
-  const [activityData, setActivityData] = useState([]);
-  const [exerciseData, setExerciseData] = useState([]);
 
-  useEffect(() => {
-    // Fetch data from your API
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/biometrics');
-        const data = await res.json();
-        
-        setWeightData(data.weightData);
-        setActivityData(data.activityData);
-        setExerciseData(data.exerciseData);
-      } catch (error) {
-        console.error("Error fetching biometrics data:", error);
-      }
-    };
+  const navigate = useNavigate();
 
-    fetchData();
-  }, []);
+  const handleHome = ()=>{
+    navigate('/');
+  }
 
-  // Line chart for weight progress
-  const weightChartData = {
-    labels: weightData.map(entry => entry.date),
-    datasets: [
-      {
-        label: 'Weight (kg)',
-        data: weightData.map(entry => entry.weight),
-        borderColor: 'rgba(75, 192, 192, 1)',
-        fill: false,
-        tension: 0.1,
-      },
-    ],
-  };
+  const handleAbout = ()=>{
+    navigate('/about');
+  }
 
-  // Pie chart for activity distribution
-  const activityChartData = {
-    labels: activityData.map(activity => activity.activity),
-    datasets: [
-      {
-        label: 'Time spent (mins)',
-        data: activityData.map(activity => activity.time),
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
-      },
-    ],
-  };
+  const handleUsage = ()=>{
+    navigate('/usage')
+  }
 
-  // Bar chart for exercise reps
-  const exerciseChartData = {
-    labels: exerciseData.map(exercise => exercise.exercise),
-    datasets: [
-      {
-        label: 'Reps',
-        data: exerciseData.map(exercise => exercise.reps),
-        backgroundColor: 'rgba(153, 102, 255, 0.6)',
-      },
-    ],
-  };
+  const handleDash = ()=>{
+    navigate('/dashboard')
+  }
 
   return (
-    <div className="analytics-page">
-      <h2>User Performance Analytics</h2>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid size={8}>
+          <Item style={{backgroundColor: '#dfcdc3'}}>
+            {/* line chart */}
+            <h2 style={{textAlign:'right', fontSize:'1.2vw'}}> targetted weight: 65 kgs </h2>
+            <LineGraph />
+            <h1 style={{textAlign:'center', fontSize:'1.2vw'}}> WEIGHT GAIN/LOSS PROGRESS LINE GRAPH </h1>
+          </Item>
+        </Grid>
+        <Grid size={4}>
+          <Item style={{backgroundColor:'#719192', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
+            {/* pie chart */}
+            <PieGraph />
+            <h1 style={{textAlign:'center', fontSize:'1.3vw', color:'#dadada'}}> What to focus on? Cardio, Strength, Diet </h1>
+          </Item>
+        </Grid>
+        <Grid size={4}>
+          <Item style={{backgroundColor:'#bcdbdf'}}>
+            {/* radar chart */}
+            <RadarGraph />
+          </Item>
+        </Grid>
+        <Grid size={8}>
+          <Item style={{backgroundColor: '#dfcdc3'}}>
+            <h1> ANALYTICS </h1>
 
-      <div className="chart-container">
-        <h3>Weight Progress</h3>
-        <Line data={weightChartData} options={{ responsive: true, maintainAspectRatio: false }} />
-      </div>
+            <p style={{color:'#1A2027', fontSize:'1.2vw'}}>Get detailed insights into your data with interactive charts and visualizations. Analyze trends, track key metrics, and monitor performance with easy-to-read graphs and customizable axes. The analytics page helps you make informed decisions based on real-time data. Explore various chart types, including line, bar, and pie charts, to visualize your data in the most effective way.</p>
 
-      <div className="chart-container">
-        <h3>Activity Distribution</h3>
-        <Pie data={activityChartData} options={{ responsive: true, maintainAspectRatio: false }} />
-      </div>
+            <ul style={{width:'100%', display:'flex',justifyContent:'space-around', alignItems:'center', listStyle:'none', marginTop:'2vh'}}>
+              <li style={{border:'1px solid gray', padding:'7px 13px', cursor:'pointer'}}>Update Radar Chart data</li>
 
-      <div className="chart-container">
-        <h3>Exercise Reps</h3>
-        <Bar data={exerciseChartData} options={{ responsive: true, maintainAspectRatio: false }} />
-      </div>
-    </div>
+              <li style={{border:'1px solid gray', padding:'7px 13px', cursor:'pointer'}}>Update Pie Chart data</li>
+
+              <li style={{border:'1px solid gray', padding:'7px 13px', cursor:'pointer'}}>Update Line Chart data</li>
+            </ul>
+
+
+
+            <button id='btn' style={{marginLeft:'2vw'}} onClick={handleDash}> Go To Dashboard </button>
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
-};
-
+}
