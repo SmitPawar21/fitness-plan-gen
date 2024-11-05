@@ -1,4 +1,4 @@
-# AI-Based Fitness Plan Generation App
+# FitGenius | AI-Based Fitness Plan Generation App
 
 This repository contains an AI-driven fitness plan generation application that uses user biometrics to create personalized fitness plans. With an intuitive dashboard, users can monitor analytics, manage subscriptions, track tasks, and generate unique fitness plans with guidance from an integrated chatbot.
 
