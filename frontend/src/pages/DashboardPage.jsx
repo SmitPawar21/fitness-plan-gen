@@ -58,6 +58,10 @@ export const DashboardPage = () => {
     navigate('/');
   }
 
+  const handleAnalytics = ()=>{
+    navigate('/analytics');
+  }
+
   if(!user){
     return <Navigate to="/signin" />;
   }
@@ -88,7 +92,7 @@ export const DashboardPage = () => {
         </Grid>
         <Grid size={4}>
           <Item className='item item_4'>
-            <div className="filter-box-item">
+            <div className="filter-box-item" onClick={handleAnalytics}>
               <h3> Analytics </h3>
             </div>
           </Item>
